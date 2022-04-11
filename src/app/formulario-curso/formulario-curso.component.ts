@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiServiceService } from '../services/api-service.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +17,7 @@ export class FormularioCursoComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      nombre: [this.curso ? this.curso.nombre : "", Validators.compose([Validators.required])],
+      nombre: [this.curso ? this.curso.nombre : "", Validators.compose([Validators.required,Validators.pattern("[a-zA-Z ]{2,254}"),Validators.maxLength(40)])],
       inicio_curso: [this.curso ? this.curso.inicio_curso : "", Validators.compose([Validators.required])],
       final_curso: [this.curso ? this.curso.final_curso : "", Validators.compose([Validators.required])]
     });
@@ -25,7 +25,7 @@ export class FormularioCursoComponent implements OnInit {
 
   save() {
     if (this.form.invalid) {
-      alert("Ingrese todos los campos");
+      this.toastr.warning("Ingrese todos los campos");
     } else {
       if (this.curso)
         this.apiService.Update("curso",
@@ -38,7 +38,7 @@ export class FormularioCursoComponent implements OnInit {
         ).then(x => {
           this.toastr.success("El curso se actualizo")
         }).catch(x => {
-          this.toastr.success("El curso NO se actualizo")
+          this.toastr.error("El curso NO se actualizo")
         });
       else
         this.apiService.Post("curso",
@@ -50,9 +50,18 @@ export class FormularioCursoComponent implements OnInit {
         ).then(x => {
           this.toastr.success('El curso se creo');
         }).catch(x => {
-          this.toastr.success("El curso NO se creo")
+          this.toastr.error("El curso NO se creo")
         });
     }
+  }
+
+  user_validation_messages = {
+    'nid': [
+        { type: 'required', message: 'NID is required' },
+        { type: 'minlength', message: 'NID must be at least 6 characters long' },
+        { type: 'maxlength', message: 'NID cannot be more than 10 characters long' },
+        { type: 'pattern', message: 'Your NID must contain only numbers' }
+    ],
   }
 
 }

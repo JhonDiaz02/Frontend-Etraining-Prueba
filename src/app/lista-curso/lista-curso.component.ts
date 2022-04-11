@@ -24,7 +24,7 @@ export class ListaCursoComponent implements OnInit {
       this.toastr.success("Eliminado");
       this.list();
     }).catch(x=>{
-      this.toastr.success("No se puede Eliminar");
+      this.toastr.error("No se puede Eliminar");
     });
   }
 
@@ -32,7 +32,7 @@ export class ListaCursoComponent implements OnInit {
     this.apiService.Get("curso").then(x => {
       this.cursos = x;
     }).catch(x=>{
-      this.toastr.success("No se pueden obtener los datos");
+      this.toastr.error("No se pueden obtener los datos");
     });
   }
 
