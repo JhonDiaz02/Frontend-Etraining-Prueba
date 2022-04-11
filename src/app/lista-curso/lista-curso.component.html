@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header">
+        Cursos 
+        <button type="button" class="btn btn-success btn-sm" (click)="list()">Refresh</button>
+    </div>
+    <div class="p-4">
+        <table class="table alingn-middle">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Fecha Final</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let curso of cursos">
+                    <td scope="row">{{curso.id}}</td>
+                    <td scope="row" class="p-2">{{curso.nombre}}</td>
+                    <td scope="row" class="p-2">{{curso.inicio_curso}}</td>
+                    <td scope="row" class="p-2">{{curso.final_curso}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="delete(curso.id)">Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" (click)="EditCurso(curso)">Actualizar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header">
+        Ingresar datos
+    </div>
+    <form action="" class="p-4" [formGroup]="form" (ngSubmit)="save()">
+        <div class="mb-3">
+            <label class="form-label">Nombre: </label>
+            <input type="text" class="form-control" formControlName="nombre" autofocus>
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Fecha de inicio: </label>
+            <input type="date" class="form-control" formControlName="inicio_curso" autofocus>
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Fecha Final: </label>
+            <input type="date" class="form-control" formControlName="final_curso" autofocus>
+        </div>
+        <div class="col-12 text-right d-grid">
+            <button class="btn btn-dark" type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
